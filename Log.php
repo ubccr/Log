@@ -15,6 +15,7 @@ define('PEAR_LOG_WARNING',  4);     /* Warning conditions */
 define('PEAR_LOG_NOTICE',   5);     /* Normal but significant */
 define('PEAR_LOG_INFO',     6);     /* Informational */
 define('PEAR_LOG_DEBUG',    7);     /* Debug-level messages */
+define('PEAR_LOG_TRACE',    8);     /* Trace-level messages */
 
 define('PEAR_LOG_ALL',      0xffffffff);    /* All messages */
 define('PEAR_LOG_NONE',     0x00000000);    /* No message */
@@ -390,6 +391,23 @@ class Log
     }
 
     /**
+     * A convenience function for logging a trace event.  It will log a
+     * message at the PEAR_LOG_TRACE log level.
+     *
+     * @param   mixed   $message    String or object containing the message
+     *                              to log.
+     *
+     * @return  boolean True if the message was successfully logged.
+     *
+     * @access  public
+     * @since   Log 1.7.0
+     */
+    function trace($message)
+    {
+        return $this->log($message, PEAR_LOG_TRACE);
+    }
+
+    /**
      * Returns the string representation of the message data.
      *
      * If $message is an object, _extractMessage() will attempt to extract
@@ -494,7 +512,7 @@ class Log
          * we're going to need to go back an additional step.
          */
         if (in_array($func, array('emerg', 'alert', 'crit', 'err', 'warning',
-                                  'notice', 'info', 'debug'))) {
+                                  'notice', 'info', 'debug', 'trace'))) {
             $bt2 = isset($bt[$depth + 2]) ? $bt[$depth + 2] : null;
 
             $file = is_array($bt1) ? $bt1['file'] : null;
@@ -587,7 +605,8 @@ class Log
             PEAR_LOG_WARNING => 'warning',
             PEAR_LOG_NOTICE  => 'notice',
             PEAR_LOG_INFO    => 'info',
-            PEAR_LOG_DEBUG   => 'debug'
+            PEAR_LOG_DEBUG   => 'debug',
+            PEAR_LOG_TRACE   => 'trace'
         );
 
         return $levels[$priority];
@@ -616,7 +635,8 @@ class Log
             'warning'   => PEAR_LOG_WARNING,
             'notice'    => PEAR_LOG_NOTICE,
             'info'      => PEAR_LOG_INFO,
-            'debug'     => PEAR_LOG_DEBUG
+            'debug'     => PEAR_LOG_DEBUG,
+            'trace'     => PEAR_LOG_TRACE
         );
 
         return $levels[strtolower($name)];

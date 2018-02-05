@@ -1,5 +1,5 @@
 {
-    "name": "pear/log",
+    "name": "ubccr/log",
     "type": "library",
     "description": "PEAR Logging Framework",
     "keywords": [
@@ -25,12 +25,22 @@
             "email": "jon@php.net",
             "homepage": "http://www.indelible.org",
             "role": "Developer"
+        },
+        {
+            "name": "Steve Gallo",
+            "email": "smgallo@buffalo.edu",
+            "homepage": "http://open.xdmod.org/",
+            "role": "Developer"
         }
+
     ],
     "homepage": "http://pear.github.io/Log/",
     "support": {
         "issues": "https://github.com/pear/Log/issues",
         "source": "https://github.com/pear/Log"
+    },
+    "autoload": {
+        "files": [ "Log.php" ]
     },
     "require-dev": {
         "phpunit/phpunit": "*"
